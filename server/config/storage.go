@@ -19,7 +19,7 @@ func NewStorage() *Storage {
 	if err != nil {
 		log.Fatal(err)
 	}
-	db.AutoMigrate(&models.User{}, &models.Host{}, &models.Booking{})
+	db.AutoMigrate(&models.User{}, &models.Host{}, &models.Booking{}, &models.UserSession{})
 
 	return &Storage{db}
 }

@@ -19,7 +19,7 @@ func main() {
 	bookingRepo := repository.NewBookingRepository(storage)
 
 	userService := services.NewUserService(userRepo)
-	hostService := services.NewHostService(hostRepo)
+	hostService := services.NewHostService(hostRepo, bookingRepo)
 	bookingService := services.NewBookingService(bookingRepo)
 
 	api := api.NewApi(userService, hostService, bookingService)

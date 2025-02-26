@@ -19,6 +19,6 @@ func (s *BookingService) CreateBooking(ctx context.Context, booking *models.Book
 	return s.bookingRepo.CreateBooking(ctx, booking)
 }
 
-func (s *BookingService) GetBookingsOfUser(ctx context.Context, userId int64) ([]models.Booking, error) {
+func (s *BookingService) GetBookingsOfUser(ctx context.Context, userId uint) ([]models.Booking, error) {
 	return s.bookingRepo.GetBookingsOfUser(ctx, userId)
 }

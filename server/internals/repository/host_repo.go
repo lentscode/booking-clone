@@ -15,7 +15,7 @@ func NewHostRepository(storage *config.Storage) *HostRepository {
 	return &HostRepository{storage: storage}
 }
 
-func (r HostRepository) GetHost(ctx context.Context, id int64) (*models.Host, error) {
+func (r HostRepository) GetHost(ctx context.Context, id uint) (*models.Host, error) {
 	host := new(models.Host)
 
 	result := r.storage.Db.WithContext(ctx).First(host, id)

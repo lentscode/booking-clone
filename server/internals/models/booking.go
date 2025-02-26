@@ -13,9 +13,9 @@ type Booking struct {
 	TotalPrice   int64     `json:"total_price"`
 	Status       string    `json:"status"`
 
-	UserID int64 `json:"user_id" binding:"required"`
+	UserID uint `json:"user_id" binding:"required"`
 	User   User
 
-	HostID int64 `json:"host_id" binding:"required"`
+	HostID uint `json:"host_id" binding:"required"`
 	Host   Host
 }
