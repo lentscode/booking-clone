@@ -1,1 +1,11 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - always_put_required_named_parameters_first
+    - implicit_call_tearoffs
+    - prefer_const_constructors
+    - prefer_double_quotes
+    - prefer_expression_function_bodies
+    - require_trailing_commas
+    - sort_constructors_first
