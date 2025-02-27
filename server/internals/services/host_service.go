@@ -26,7 +26,7 @@ func (s *HostService) GetHost(ctx context.Context, id uint) (*models.Host, error
 	return s.hostRepo.GetHost(ctx, id)
 }
 
-func (s *HostService) GetAvailableBookingSlotsOfHost(ctx context.Context, hostId int64, start time.Time, end time.Time) ([]models.BookingSlot, error) {
+func (s *HostService) GetAvailableBookingSlotsOfHost(ctx context.Context, hostId uint, start time.Time, end time.Time) ([]models.BookingSlot, error) {
 	bookings, err := s.bookingRepo.GetBookingsOfHostBetween(ctx, hostId, start, end)
 	if err != nil {
 		return nil, err
@@ -76,4 +76,8 @@ func (s *HostService) GetAvailableBookingSlotsOfHost(ctx context.Context, hostId
 	}
 
 	return availableSlots, nil
+}
+
+func (s *HostService) CreateHost(ctx context.Context, host *models.Host) error {
+	return s.hostRepo.CreateHost(ctx, host)
 }

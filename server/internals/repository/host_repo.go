@@ -37,3 +37,12 @@ func (r HostRepository) GetHosts(ctx context.Context) ([]models.Host, error) {
 
 	return hosts, nil
 }
+
+func (r HostRepository) CreateHost(ctx context.Context, host *models.Host) error {
+	result := r.storage.Db.WithContext(ctx).Create(host)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}

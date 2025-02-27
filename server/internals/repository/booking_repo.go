@@ -38,7 +38,7 @@ func (r BookingRepository) GetBookingsOfUser(ctx context.Context, userId uint) (
 	return bookings, nil
 }
 
-func (r BookingRepository) GetBooking(ctx context.Context, bookingId int64) (*models.Booking, error) {
+func (r BookingRepository) GetBooking(ctx context.Context, bookingId uint) (*models.Booking, error) {
 	booking := new(models.Booking)
 
 	if result := r.storage.Db.WithContext(ctx).First(booking, bookingId); result.Error != nil {
@@ -60,7 +60,7 @@ func (r BookingRepository) GetBookingsOfHost(ctx context.Context, hostId uint) (
 	return bookings, nil
 }
 
-func (r BookingRepository) GetBookingsOfHostBetween(ctx context.Context, hostId int64, start time.Time, end time.Time) ([]models.Booking, error) {
+func (r BookingRepository) GetBookingsOfHostBetween(ctx context.Context, hostId uint, start time.Time, end time.Time) ([]models.Booking, error) {
 	bookings := make([]models.Booking, 0)
 
 	result := r.storage.Db.WithContext(ctx).Where("host_id = ? AND start_time BETWEEN ? AND ?", hostId, start, end).Find(&bookings)
