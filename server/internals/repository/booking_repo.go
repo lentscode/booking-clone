@@ -63,7 +63,7 @@ func (r BookingRepository) GetBookingsOfHost(ctx context.Context, hostId uint) (
 func (r BookingRepository) GetBookingsOfHostBetween(ctx context.Context, hostId uint, start time.Time, end time.Time) ([]models.Booking, error) {
 	bookings := make([]models.Booking, 0)
 
-	result := r.storage.Db.WithContext(ctx).Where("host_id = ? AND start_time BETWEEN ? AND ?", hostId, start, end).Find(&bookings)
+	result := r.storage.Db.WithContext(ctx).Where("host_id = ? AND check_in_date BETWEEN ? AND ?", hostId, start, end).Find(&bookings)
 	if result.Error != nil {
 		return nil, result.Error
 	}

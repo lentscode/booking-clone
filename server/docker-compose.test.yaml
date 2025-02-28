@@ -1,4 +1,4 @@
-name: server
+name: server-test
 
 services:
   db:
@@ -6,12 +6,12 @@ services:
     env_file:
       - .env
     volumes:
-      - ./.db-data:/var/lib/mysql
+      - ./.test-db-data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 1s
-      timeout: 1s
-      retries: 15
+      timeout: 2s
+      retries: 10
 
   server:
     build:
@@ -26,5 +26,5 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    
+    command: ["go", "test", "-v", "./..."]
     

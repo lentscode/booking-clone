@@ -1,15 +1,13 @@
 import "package:booking_client/logic/session_manager.dart";
-import "package:http/http.dart";
+import "package:dio/dio.dart";
 
-mixin Api {
-  final client = Client();
-
-  final _baseUrl = const String.fromEnvironment("BASE_URL");
-
-  Uri getUrl(String path) => Uri.parse("$_baseUrl$path");
+class Api {
+  const Api(this.client, this.sessionManager);
+  final Dio client;
+  final SessionManager sessionManager;
 
   Future<Map<String, String>> get sessionId async {
-    final sessionId = await SessionManager().getSession();
+    final sessionId = await sessionManager.getSession();
     if (sessionId == null) {
       throw Exception("user not authenticated");
     }
@@ -22,6 +20,6 @@ mixin Api {
       throw Exception("sessionId is null");
     }
 
-    await SessionManager().setSession(sessionId);
+    await sessionManager.setSession(sessionId);
   }
 }

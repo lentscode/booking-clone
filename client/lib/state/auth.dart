@@ -3,7 +3,14 @@ import "package:booking_client/api/auth.dart";
 import "package:booking_client/utils/result.dart";
 import "package:flutter/foundation.dart";
 
-enum AuthType { login, signUp }
+enum AuthType {
+  login("Login"),
+  signUp("Sign Up");
+
+  const AuthType(this.text);
+
+  final String text;
+}
 
 @immutable
 sealed class AuthState {
@@ -44,8 +51,8 @@ class AuthFailure extends AuthState {
       AuthFailure(type: type ?? this.type, error: error ?? this.error);
 }
 
-class AuthStateCubit extends Cubit<AuthState> {
-  AuthStateCubit(this._auth) : super(const AuthInitial(type: AuthType.login));
+class AuthCubit extends Cubit<AuthState> {
+  AuthCubit(this._auth) : super(const AuthInitial(type: AuthType.login));
 
   final Auth _auth;
 

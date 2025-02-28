@@ -3,14 +3,13 @@ import "dart:convert";
 import "package:booking_client/api/api.dart";
 import "package:booking_client/utils/result.dart";
 
-class Auth with Api {
+class Auth extends Api {
+  const Auth(super.client, super.sessionManager);
+
   AsyncResult<void, AuthError> login(String email, String password) async {
     final body = {"email": email, "password": password};
 
-    final response = await client.post(
-      getUrl("/login"),
-      body: jsonEncode(body),
-    );
+    final response = await client.post("/login", data: jsonEncode(body));
 
     if (response.statusCode != 200) {
       return AsyncResultExtension.failure(
@@ -19,7 +18,7 @@ class Auth with Api {
     }
 
     final sessionId =
-        response.headers["set-cookie"]?.split(";")[0].split("=")[1];
+        response.headers["set-cookie"]?.first.split(";")[0].split("=")[1];
 
     await setSessionId(sessionId);
 
@@ -37,10 +36,7 @@ class Auth with Api {
       "confirm_password": confirmPassword,
     };
 
-    final response = await client.post(
-      getUrl("/signup"),
-      body: jsonEncode(body),
-    );
+    final response = await client.post("/signup", data: jsonEncode(body));
 
     if (response.statusCode != 200) {
       return AsyncResultExtension.failure(
@@ -49,7 +45,7 @@ class Auth with Api {
     }
 
     final sessionId =
-        response.headers["set-cookie"]?.split(";")[0].split("=")[1];
+        response.headers["set-cookie"]?.first.split(";")[0].split("=")[1];
 
     await setSessionId(sessionId);
 

@@ -1,8 +1,19 @@
 import "dart:convert";
 
 import "package:booking_client/models/host.dart";
+import "package:flutter/foundation.dart";
 
 class Booking {
+  @visibleForTesting
+  const Booking({
+    required this.id,
+    required this.checkInDate,
+    required this.checkOutDate,
+    required this.totalPrice,
+    required this.status,
+    required this.host,
+  });
+
   Booking.fromMap(Map<String, dynamic> map)
     : id = map["id"],
       checkInDate = DateTime.parse(map["check_in_date"]),
